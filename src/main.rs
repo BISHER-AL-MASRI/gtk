@@ -10,6 +10,7 @@ const APP_ID: &str = "org.bisheralmasri.helloworld";
 fn main() -> glib::ExitCode {
     let app = adw::Application::builder().application_id(APP_ID).build();
 
+
     app.connect_startup(|_| load_css());
     app.connect_activate(build_ui);
 
@@ -53,6 +54,9 @@ fn build_ui(app: &adw::Application) {
         .spacing(12)
         .build();
 
+    label.set_halign(gtk::Align::Center);
+    label.set_valign(gtk::Align::Center);
+
     container.append(&*label);
     container.append(&button);
 
@@ -60,7 +64,10 @@ fn build_ui(app: &adw::Application) {
         .application(app)
         .title("Title")
         .child(&container)
+        .default_width(200)
+        .default_height(150)
         .build();
 
+    window.set_size_request(175, 50);
     window.present();
 }
